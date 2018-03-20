@@ -1,13 +1,11 @@
 <template lang="pug">
-  #app
-    b-alert(show) {{ message }} 
 </template>
 
 <script>
 export default {
   data: function () {
     return {
-      message: "Hello New Vue!"
+      message: "This is the new!"
     }
   }
 }
