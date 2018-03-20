@@ -1,4 +1,6 @@
 <template lang="pug">
+  #app
+    p {{ message }} 
 </template>
 
 <script>

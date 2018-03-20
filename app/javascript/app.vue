@@ -1,15 +1,27 @@
 <template lang="pug">
   #app
-    b-alert(show) {{ message }} 
+    router-view
 </template>
 
 <script>
-export default {
-  data: function () {
-    return {
-      message: "Hello New Vue!"
-    }
-  }
+import VueRouter from 'vue-router';
+
+import Index from './index.vue'
+import Show from './show.vue'
+import New from './new.vue'
+import Edit from './edit.vue'
+
+const router = new VueRouter({
+  routes: [
+    { path: '/', component: Index },
+    { path: '/show', component: Show},
+    { path: '/new', component: New},
+    { path: '/edit', component: Edit}
+  ]
+})
+
+export default{
+  router
 }
 </script>
 
