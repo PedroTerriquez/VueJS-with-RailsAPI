@@ -13,10 +13,10 @@ import Edit from './edit.vue'
 
 const router = new VueRouter({
   routes: [
-    { path: '/', component: Index },
-    { path: '/show', component: Show},
-    { path: '/new', component: New},
-    { path: '/edit', component: Edit}
+    { path: '/', name: 'index', component: Index },
+    { path: '/show/:id', name: 'show', component: Show},
+    { path: '/new', name: 'new', component: New},
+    { path: '/edit/:id', name: 'edit', component: Edit}
   ]
 })
 
