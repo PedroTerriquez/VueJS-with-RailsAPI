@@ -2,6 +2,7 @@
   #app
     app-header
     router-view
+    app-footer
 </template>
 
 <script>
@@ -13,6 +14,7 @@ import New from './new.vue'
 import Edit from './edit.vue'
 import Delete from './delete.vue'
 import Header from './header.vue'
+import Footer from './footer.vue'
 
 const router = new VueRouter({
   routes: [
@@ -27,7 +29,8 @@ const router = new VueRouter({
 export default{
   router,
   components: {
-    appHeader: Header
+    appHeader: Header,
+    appFooter: Footer
   }
 }
 </script>

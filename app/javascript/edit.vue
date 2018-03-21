@@ -14,7 +14,7 @@
               textarea.form-control(v-model='post.body', :placeholder='post.body')
             button.btn.btn-primary(type="submit") Submit
         .card-footer.text-muted
-          .a(v-on:click="goBack") Click here if you want to go back
+          a(href='', v-on:click.prevent="goBack") Back 
 </template>
 
 <script>
