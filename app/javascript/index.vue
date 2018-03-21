@@ -22,8 +22,6 @@
           .btn.btn-light   
             router-link(:to="{ name: 'edit', params: { id: post.id }}") Edit 
           .btn.btn-light(v-on:click.prevent="deletePost( post.id)") Delete
-            
-            
 </template>
 
 <script>

@@ -1,5 +1,6 @@
 <template lang="pug">
   #app
+    app-header
     router-view
 </template>
 
@@ -11,6 +12,7 @@ import Show from './show.vue'
 import New from './new.vue'
 import Edit from './edit.vue'
 import Delete from './delete.vue'
+import Header from './header.vue'
 
 const router = new VueRouter({
   routes: [
@@ -23,7 +25,10 @@ const router = new VueRouter({
 })
 
 export default{
-  router
+  router,
+  components: {
+    appHeader: Header
+  }
 }
 </script>
 
