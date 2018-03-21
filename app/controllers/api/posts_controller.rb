@@ -2,7 +2,7 @@
     before_action :find_post, except: [:new, :create]
 
     def index
-      @posts = Post.order(created_at: :DESC)
+      @posts = Post.order(:id)
     end
 
     def show

@@ -22,7 +22,6 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      message: "This is index bitch",
       post: {},
       errors: [] 
     }

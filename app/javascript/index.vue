@@ -17,8 +17,13 @@
         td {{ post.body }}
         td {{ post.created_at }}
         td
-          router-link(:to="{ name: 'show', params: { id: post.id }}") Show  
-          router-link(:to="{ name: 'edit', params: { id: post.id }}") Edit 
+          .btn.btn-light  
+            router-link(:to="{ name: 'show', params: { id: post.id }}") Show  
+          .btn.btn-light   
+            router-link(:to="{ name: 'edit', params: { id: post.id }}") Edit 
+          .btn.btn-light(v-on:click.prevent="deletePost( post.id)") Delete
+            
+            
 </template>
 
 <script>
@@ -26,9 +31,20 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      message: "This is index bitch",
       posts: [],
       errors: []
+    }
+  },
+  methods:{
+    deletePost (id){
+      if (confirm('Are you sure to delete this Post?')) {
+        axios.delete(`api/posts/`+id)
+        .then(response =>{})
+          .catch(e=>{
+            this.errors.push(e)
+          })
+        event.target.parentElement.parentElement.remove()
+      }
     }
   },
   created() {

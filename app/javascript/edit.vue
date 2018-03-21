@@ -5,14 +5,14 @@
       .card.text-center
         .card-header Edit Post
         .card-body
-          form
+          form(v-on:submit.prevent="patchPost")
             .form-group
               label Title
-              input.form-control(:placeholder='post.title')
+              input.form-control(v-model='post.title', :placeholder='post.title')
             .form-group
               label Body
-              textarea.form-control(:placeholder='post.body')
-            button.btn.btn-primary(type='submit') Submit
+              textarea.form-control(v-model='post.body', :placeholder='post.body')
+            button.btn.btn-primary(type="submit") Submit
         .card-footer.text-muted you want to go 
           router-link(:to="{ path: '/' }") Back?
 </template>
@@ -22,9 +22,17 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      message: "This is index bitch",
       post: {},
       errors: [] 
+    }
+  },
+  methods:{
+    patchPost() {
+      axios.patch(`api/posts/`+this.post.id,this.post)
+      .then(response =>{})
+        .catch(e=>{
+          this.errors.push(e)
+        })
     }
   },
   created() {
