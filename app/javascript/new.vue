@@ -13,8 +13,8 @@
               label Body
               textarea.form-control(v-model='post.body', placeholder='Body')
             button.btn.btn-primary(type='submit') Submit
-        .card-footer.text-muted you want to go 
-          router-link(:to="{ path: '/' }") Back?
+        .card-footer.text-muted
+          .a(v-on:click="goBack") Click here if you want to go back
 </template>
 
 <script>
@@ -33,6 +33,10 @@ export default {
         .catch(e=>{
           this.errors.push(e)
         })
+      goBack()
+    },
+    goBack(){
+      this.$router.go(-1)
     }
   }
 }

@@ -14,7 +14,10 @@
         td {{ post.title }}
         td {{ post.body }}
         td {{ post.created_at }} 
-        td EDITDELETE
+        td
+          .btn.btn-light   
+            router-link(:to="{ name: 'edit', params: { id: post.id }}") Edit 
+          .btn.btn-light(v-on:click.prevent="deletePost( post.id)") Delete
 </template>
 
 <script>
@@ -24,6 +27,19 @@ export default {
     return {
       post: {},
       errors: [] 
+    }
+  },
+  methods:{
+    deletePost (id){
+      if (confirm('Are you sure to delete this Post?')) {
+        axios.delete(`api/posts/`+id)
+        .then(response =>{})
+          .catch(e=>{
+            this.errors.push(e)
+          })
+        event.target.parentElement.parentElement.remove()
+        this.$router.go(-1)
+      }
     }
   },
   created() {
