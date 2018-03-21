@@ -8,10 +8,10 @@
           form(v-on:submit.prevent="patchPost")
             .form-group
               label Title
-              input.form-control(v-model='post.title', :placeholder='post.title')
+              input.form-control(v-model='post.title', :placeholder='post.title', :required="true")
             .form-group
               label Body
-              textarea.form-control(v-model='post.body', :placeholder='post.body')
+              textarea.form-control(v-model='post.body', :placeholder='post.body', :required="true")
             button.btn.btn-primary(type="submit") Submit
         .card-footer.text-muted
           a(v-on:click="goBack") Back 

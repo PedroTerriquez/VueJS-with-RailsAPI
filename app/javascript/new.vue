@@ -8,10 +8,10 @@
           form(v-on:submit.prevent="postPost")
             .form-group
               label Title
-              input.form-control(v-model='post.title', placeholder='Title')
+              input.form-control(v-model='post.title', placeholder='Title', :required="true")
             .form-group
               label Body
-              textarea.form-control(v-model='post.body', placeholder='Body')
+              textarea.form-control(v-model='post.body', placeholder='Body', :required="true")
             button.btn.btn-primary(type='submit') Submit
         .card-footer.text-muted
           a(v-on:click="goBack") Back 

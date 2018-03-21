@@ -17,11 +17,19 @@
 
     def create
       @post = Post.new(post_params)
-      @post.save
+      if @post.save
+        render 'show'
+      else
+        render :json => @post.errors
+      end
     end
 
     def update
-      @post.update(post_params)
+      if @post.update(post_params)
+        render 'show'
+      else
+        render :json => @post.errors
+      end
     end
 
     def destroy
