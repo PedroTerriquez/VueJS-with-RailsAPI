@@ -15,7 +15,7 @@
         .col-md-1
           img.logo(src='https://vuejs.org/images/logo.png', alt='Logo', height=70, width=70)
         .col-md-11
-          h1 Vue.js CRUD for posts
+          h1 Vue.js CRUD POSTS
           p Created by: 
             a(href='https://github.com/PedroTerriquez') Pedro Terriquez
 </template>

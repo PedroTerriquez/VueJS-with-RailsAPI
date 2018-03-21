@@ -1,8 +1,8 @@
 <template lang="pug">
 #footer
-  footer.py-5.bg-dark
+  footer.py-5.bg-dark.site-footer
     .container
-      p.m-0.text-center.text-white Copyright © Your Website 2017
+      p.m-0.text-center.text-white Copyright © POSTCITY 2017
 
   
 </template>
@@ -11,17 +11,27 @@
 </script>
 
 <style scoped>
-header {
-  padding: 154px 0 100px;
+
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -142px; 
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer, .page-wrap:after {
+  height: 142px; 
+}
+.site-footer {
+  background: orange;
 }
 
-@media (min-width: 992px) {
-  header {
-    padding: 25px 0 2px;
-  }
-}
-
-section {
-  padding: 150px 0;
-}
 </style>

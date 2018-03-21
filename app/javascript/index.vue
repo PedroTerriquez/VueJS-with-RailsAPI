@@ -1,7 +1,7 @@
 <template lang="pug">
 #app
-  .btn.btn-light 
-    router-link(:to="{ path: '/new' }") New
+  .card
+    .card-header List of posts created
   table.table
     thead.thead-light
       tr
@@ -9,7 +9,8 @@
         th(scope="col") Title
         th(scope="col") Body
         th(scope="col") Created
-        th(scope="col") Actions 
+        th(scope="col") 
+          router-link.btn.btn-success(:to="{ path: '/new' }") New
     tbody(v-if="posts && posts.length")
       tr(v-for="post of posts")
         th(scope="row") {{ post.id }} 
@@ -17,11 +18,10 @@
         td {{ post.body }}
         td {{ post.created_at }}
         td
-          .btn.btn-light  
-            router-link(:to="{ name: 'show', params: { id: post.id }}") Show  
-          .btn.btn-light   
-            router-link(:to="{ name: 'edit', params: { id: post.id }}") Edit 
-          .btn.btn-light(v-on:click.prevent="deletePost( post.id)") Delete
+          router-link.btn.btn-info.btn-xs(:to="{ name: 'show', params: { id: post.id }}") Show  
+
+          router-link.btn.btn-warning.btn-xs(:to="{ name: 'edit', params: { id: post.id }}") Edit 
+          button.btn.btn-danger.btn-xs(v-on:click.prevent="deletePost( post.id)") Delete
 </template>
 
 <script>
@@ -58,4 +58,8 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+a {
+  color: white;
+  margin-right: 5px
+}
 </style>

@@ -14,7 +14,7 @@
               textarea.form-control(v-model='post.body', placeholder='Body')
             button.btn.btn-primary(type='submit') Submit
         .card-footer.text-muted
-          a(href='', v-on:click.prevent="goBack") Back 
+          a(v-on:click="goBack") Back 
 </template>
 
 <script>
@@ -29,11 +29,12 @@ export default {
   methods:{
     postPost() {
       axios.post( `api/posts/`, this.post)
-      .then(response =>{})
+      .then(response =>{
+        this.goBack()
+      })
         .catch(e=>{
           this.errors.push(e)
         })
-      goBack()
     },
     goBack(){
       this.$router.go(-1)
