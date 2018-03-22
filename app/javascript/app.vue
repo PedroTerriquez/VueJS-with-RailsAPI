@@ -1,7 +1,7 @@
 <template lang="pug">
   #app
     app-header
-    router-view
+    router-view.content-app
     app-footer
 </template>
 
@@ -36,4 +36,7 @@ export default{
 </script>
 
 <style scoped lang='scss'>
+.content-app {
+  margin-bottom: 112px;
+}
 </style>
