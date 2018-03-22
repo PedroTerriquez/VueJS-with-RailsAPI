@@ -8,12 +8,14 @@
           form(v-on:submit.prevent="patchPost")
             .form-group
               label Title
-              input.form-control(v-model='post.title', :placeholder='post.title', :required="true")
+              input.form-control(v-model='post.title', :placeholder='post.title')
             .form-group
               label Body
-              textarea.form-control(v-model='post.body', :placeholder='post.body', :required="true")
+              textarea.form-control(v-model='post.body', :placeholder='post.body')
             button.btn.btn-primary(type="submit") Submit
         .card-footer.text-muted
+          .alert.alert-danger(v-for='(field, key in errors')
+            strong(v-for='error in field') {{ key }} {{ error }}
           a(v-on:click="goBack") Back 
 </template>
 
@@ -23,7 +25,7 @@ export default {
   data() {
     return {
       post: {},
-      errors: [] 
+      errors: {} 
     }
   },
   methods:{
@@ -33,7 +35,8 @@ export default {
         this.goBack()
       })
         .catch(e=>{
-          this.errors.push(e)
+          this.errors = e.response.data
+          console.log(this.errors)
         })
     },
     goBack(){
@@ -53,4 +56,11 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+strong {
+    display: inline-block;
+}
+
+strong::first-letter{
+  text-transform:capitalize;
+}
 </style>

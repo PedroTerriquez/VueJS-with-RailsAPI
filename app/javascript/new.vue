@@ -14,9 +14,8 @@
               textarea.form-control(v-model='post.body', placeholder='Body')
             button.btn.btn-primary(type='submit') Submit
         .card-footer.text-muted
-          .alert.alert-danger(v-for='error in errors')
-            strong Danger!
-            |  {{ error.response.request.response }}
+          .alert.alert-danger(v-for='(field, key in errors')
+            strong(v-for='error in field') {{ key }} {{ error }}
           a(v-on:click="goBack") Back 
 </template>
 
@@ -29,7 +28,7 @@ export default {
         title: null,
         body: null
       },
-      errors: [] 
+      errors: {} 
     }
   },
   methods:{
@@ -38,8 +37,9 @@ export default {
       .then(response =>{
         this.goBack()
       })
-        .catch(e=>{
-          this.errors.push(e)
+        .catch(e => {
+          this.errors = e.response.data
+          console.log(this.errors)
         })
     },
     goBack(){
@@ -50,4 +50,11 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+strong {
+    display: inline-block;
+}
+
+strong::first-letter{
+  text-transform:capitalize;
+}
 </style>
