@@ -20,7 +20,7 @@
       if @post.save
         render 'show'
       else
-        render :json => @post.errors
+        render :json => @post.errors, status: 400
       end
     end
 
@@ -28,7 +28,7 @@
       if @post.update(post_params)
         render 'show'
       else
-        render :json => @post.errors
+        render :json => @post.errors, status: 400
       end
     end
 

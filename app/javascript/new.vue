@@ -8,12 +8,15 @@
           form(v-on:submit.prevent="postPost")
             .form-group
               label Title
-              input.form-control(v-model='post.title', placeholder='Title', :required="true")
+              input.form-control(v-model='post.title', placeholder='Title')
             .form-group
               label Body
-              textarea.form-control(v-model='post.body', placeholder='Body', :required="true")
+              textarea.form-control(v-model='post.body', placeholder='Body')
             button.btn.btn-primary(type='submit') Submit
         .card-footer.text-muted
+          .alert.alert-danger(v-for='error in errors')
+            strong Danger!
+            |  {{ error.response.request.response }}
           a(v-on:click="goBack") Back 
 </template>
 
@@ -22,13 +25,16 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      post: {},
+      post: {
+        title: null,
+        body: null
+      },
       errors: [] 
     }
   },
   methods:{
     postPost() {
-      axios.post( `api/posts/`, this.post)
+      axios.post( `api/posts.json`, this.post)
       .then(response =>{
         this.goBack()
       })
