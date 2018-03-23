@@ -13,7 +13,7 @@
     .container
       .row.branding
         .col-md-1
-          img.logo(src='https://vuejs.org/images/logo.png', alt='Logo', height=70, width=70)
+          img.imagen.logo(src='https://vuejs.org/images/logo.png', alt='Logo')
         .col-md-11
           h1 Vue.js CRUD POSTS
           p Created by: 
@@ -37,4 +37,15 @@ header {
 section {
   padding: 150px 0;
 }
+
+img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70px;
+    height: 70px;
+    margin:-30px 0 0 -30px;
+    animation:spin 300s linear infinite;
+}
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 </style>

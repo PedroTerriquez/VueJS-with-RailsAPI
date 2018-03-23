@@ -33,7 +33,12 @@
     end
 
     def destroy
-      @post.destroy
+      if @post.present?
+        @post.destroy 
+        render json: {message: "success"}, status: 200
+      else
+        render json: @post, message: "Failed to remove", status: :bad_request
+      end
     end
 
     private

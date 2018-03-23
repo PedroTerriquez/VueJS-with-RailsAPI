@@ -20,7 +20,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+import controller from '../config/controller'
+
 export default {
   data() {
     return {
@@ -30,21 +31,20 @@ export default {
   },
   methods:{
     patchPost() {
-      axios.patch(`api/posts/${this.post.id}`,this.post)
-      .then(response =>{
-        this.goBack()
-      })
+      controller.update(this.post)
+        .then(response =>{
+          this.goBack()
+        })
         .catch(e=>{
           this.errors = e.response.data
-          console.log(this.errors)
-        })
+        }) 
     },
     goBack(){
       this.$router.go(-1)
     }
   },
   created() {
-    axios.get(`api/posts/`+ this.$route.params.id)
+    controller.show(this.$route.params.id)
       .then(response => {
         this.post = response.data
       })

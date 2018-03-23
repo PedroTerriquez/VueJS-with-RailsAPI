@@ -20,7 +20,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+import controller from '../config/controller'
+
 export default {
   data() {
     return {
@@ -33,7 +34,7 @@ export default {
   },
   methods:{
     postPost() {
-      axios.post( `api/posts.json`, this.post)
+      controller.create(this.post)
       .then(response =>{
         this.goBack()
       })

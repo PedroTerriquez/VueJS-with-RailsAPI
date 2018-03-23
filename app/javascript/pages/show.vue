@@ -16,23 +16,24 @@
         td {{ post.created_at }} 
         td
           .btn.btn-light   
-            router-link(:to="{ name: 'edit', params: { id: post.id }}") Edit 
-          .btn.btn-light(v-on:click.prevent="deletePost( post.id)") Delete
+            router-link.btn.btn-warning.btn-xs(:to="{ name: 'edit', params: { id: post.id }}") Edit 
+          .btn.btn-light.btn-danger.btn-xs(v-on:click.prevent="deletePost( post.id)") Delete
 </template>
 
 <script>
-import axios from 'axios';
+import controller from '../config/controller'
+
 export default {
   data() {
     return {
-      post: {},
+      post: { id: null},
       errors: [] 
     }
   },
   methods:{
     deletePost (id){
-      if (confirm('Are you sure to delete this Post?')) {
-        axios.delete(`api/posts/`+id)
+      if (confirm('Are you sure to delete this post?')) {
+        controller.destroy(id)
         .then(response =>{})
           .catch(e=>{
             this.errors.push(e)
@@ -43,7 +44,7 @@ export default {
     }
   },
   created() {
-    axios.get(`api/posts/`+ this.$route.params.id)
+    controller.show(this.$route.params.id)
       .then(response => {
         this.post = response.data
       })
