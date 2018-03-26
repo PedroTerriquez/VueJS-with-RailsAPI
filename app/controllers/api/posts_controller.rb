@@ -1,4 +1,5 @@
-  class Api::PostsController < ApplicationController
+module Api
+  class PostsController < Api::ApplicationController
     before_action :find_post, except: [:new, :create]
 
     def index
@@ -50,3 +51,4 @@
       params.require(:post).permit(:title, :body)
     end
   end
+end

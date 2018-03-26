@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import controller from '../config/controller'
+import post_controller from '../config/post_controller'
 
 export default {
   data() {
@@ -34,7 +34,7 @@ export default {
   },
   methods:{
     postPost() {
-      controller.create(this.post)
+      post_controller.create(this.post)
       .then(response =>{
         this.goBack()
       })

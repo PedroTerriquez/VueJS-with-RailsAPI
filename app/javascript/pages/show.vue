@@ -15,13 +15,12 @@
         td {{ post.body }}
         td {{ post.created_at }} 
         td
-          .btn.btn-light   
-            router-link.btn.btn-warning.btn-xs(:to="{ name: 'edit', params: { id: post.id }}") Edit 
-          .btn.btn-light.btn-danger.btn-xs(v-on:click.prevent="deletePost( post.id)") Delete
+          router-link.btn.btn-warning.btn-xs(:to="{ name: 'edit', params: { id: post.id }}") Edit 
+          .btn.btn-danger.btn-xs(v-on:click.prevent="deletePost( post.id )") Delete
 </template>
 
 <script>
-import controller from '../config/controller'
+import post_controller from '../config/post_controller'
 
 export default {
   data() {
@@ -33,7 +32,7 @@ export default {
   methods:{
     deletePost (id){
       if (confirm('Are you sure to delete this post?')) {
-        controller.destroy(id)
+        post_controller.destroy(id)
         .then(response =>{})
           .catch(e=>{
             this.errors.push(e)
@@ -44,7 +43,7 @@ export default {
     }
   },
   created() {
-    controller.show(this.$route.params.id)
+    post_controller.show(this.$route.params.id)
       .then(response => {
         this.post = response.data
       })

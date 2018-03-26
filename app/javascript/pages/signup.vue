@@ -3,15 +3,21 @@
   .container
     .col-xs-10.offset-xs-1.col-md-4.offset-md-4
       .card.text-center
-        .card-header Edit Post
+        .card-header Sign Up
         .card-body
-          form(v-on:submit.prevent="patchPost")
+          form(v-on:submit.prevent="signUp")
             .form-group
-              label Title
-              input.form-control(v-model='post.title', :placeholder='post.title')
+              label First Name
+              input.form-control(v-model='user.first_name')
             .form-group
-              label Body
-              textarea.form-control(v-model='post.body', :placeholder='post.body')
+              label Last Name
+              input.form-control(v-model='user.last_name')
+            .form-group
+              label Email
+              input.form-control(type="email", v-model='user.email')
+            .form-group
+              label Password
+              input.form-control(type="password",v-model='user.password')
             button.btn.btn-primary(type="submit") Submit
         .card-footer.text-muted
           .alert.alert-danger(v-for='(field, key in errors')
@@ -20,37 +26,37 @@
 </template>
 
 <script>
-import post_controller from '../config/post_controller'
+import user_controller from '../config/user_controller'
 
 export default {
   data() {
     return {
-      post: {},
+      user: {
+        email: null,
+        password: null,
+        first_name:null,
+        last_name:null
+      },
       errors: {} 
     }
   },
   methods:{
-    patchPost() {
-      post_controller.update(this.post)
+    signUp() {
+      console.log(this.user)
+      user_controller.signup(this.user)
         .then(response =>{
-          this.goBack()
+          console.log(response)
+          //this.goBack()
         })
         .catch(e=>{
           this.errors = e.response.data
-        }) 
+        })
     },
     goBack(){
       this.$router.go(-1)
     }
   },
   created() {
-    post_controller.show(this.$route.params.id)
-      .then(response => {
-        this.post = response.data
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
   }
 }
 </script>

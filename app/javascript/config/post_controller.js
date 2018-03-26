@@ -1,5 +1,5 @@
 import axios from 'axios';
-const controller = (function (){
+const post_controller = (function (){
   function update(post){
     return axios.patch(`/api/posts/${post.id}`,post)
   }
@@ -19,4 +19,4 @@ const controller = (function (){
   return { update, create, destroy, show, all } ;
 })()
 
-export default controller;
+export default post_controller;
