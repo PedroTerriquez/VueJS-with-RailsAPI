@@ -8,7 +8,7 @@
           form(v-on:submit.prevent="signIn")
             .form-group
               label email
-              input.form-control(type="email", v-model='user.email')
+              input.form-control(type="email", value="user", v-model='user.email')
             .form-group
               label password
               input.form-control(type="password",v-model='user.password')
@@ -16,12 +16,11 @@
         .card-footer.text-muted
           .alert.alert-danger(v-for='(field, key in errors')
             strong(v-for='error in field') {{ key }} {{ error }}
-          a(v-on:click="goBack") Back 
+          a(href="",v-on:click="goSignUp") Create an account 
 </template>
 
 <script>
 import user_controller from '../config/user_controller'
-
 export default {
   data() {
     return {
@@ -34,14 +33,17 @@ export default {
   },
   methods:{
     signIn() {
-      console.log(this.user)
       user_controller.signin(this.user)      
         .then(response =>{
-          this.errors = response
+          sessionStorage.setItem("JWT", response.data.auth_token)
+          this.goBack()
         })
         .catch(e=>{
           this.errors = e.response.data
         }) 
+    },
+    goSignUp(){
+      this.$router.push({ path: "/signup"})
     },
     goBack(){
       this.$router.go(-1)

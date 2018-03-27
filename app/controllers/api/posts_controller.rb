@@ -1,6 +1,7 @@
 module Api
   class PostsController < Api::ApplicationController
     before_action :find_post, except: [:new, :create]
+    before_action :authenticate_request!, except: [:destroy]
 
     def index
       @posts = Post.order(:id)

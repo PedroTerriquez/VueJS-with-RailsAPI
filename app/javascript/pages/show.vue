@@ -17,6 +17,7 @@
         td
           router-link.btn.btn-warning.btn-xs(:to="{ name: 'edit', params: { id: post.id }}") Edit 
           .btn.btn-danger.btn-xs(v-on:click.prevent="deletePost( post.id )") Delete
+  a(href="/") Back to the list
 </template>
 
 <script>

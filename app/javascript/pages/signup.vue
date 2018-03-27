@@ -22,7 +22,7 @@
         .card-footer.text-muted
           .alert.alert-danger(v-for='(field, key in errors')
             strong(v-for='error in field') {{ key }} {{ error }}
-          a(v-on:click="goBack") Back 
+          a(href="", v-on:click="goSignIn") Sign in instead 
 </template>
 
 <script>
@@ -54,6 +54,9 @@ export default {
     },
     goBack(){
       this.$router.go(-1)
+    },
+    goSignIn(){
+      this.$router.push({ path: '/signin'})
     }
   },
   created() {

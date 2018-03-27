@@ -11,6 +11,8 @@
             a.nav-link.js-scroll-trigger(href='/signup') Sign Up
           li.nav-item
             a.nav-link.js-scroll-trigger(href='/signin') Sign In
+          li.nav-item
+            a.nav-link.js-scroll-trigger(v-on:click.prevent="logOut") Log out
   header
     .container
       .row.branding
@@ -23,6 +25,20 @@
 </template>
 
 <script>
+import post_controller from '../config/post_controller'
+
+export default{
+  data(){
+    return{
+  }
+  },
+  methods: {
+    logOut(){
+      sessionStorage.removeItem('JWT')  
+      this.$router.push({ path: '/signin'})
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -41,13 +57,13 @@ section {
 }
 
 img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 70px;
-    height: 70px;
-    margin:-30px 0 0 -30px;
-    animation:spin 300s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  margin:-30px 0 0 -30px;
+  animation:spin 1s linear infinite;
 }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 </style>
