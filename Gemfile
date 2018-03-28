@@ -11,6 +11,8 @@ gem 'webpacker'
 gem 'pg'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.5'
+gem 'jwt'
+gem 'bcrypt'
 
 
 group :development, :test do

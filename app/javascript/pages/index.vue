@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import controller from '../config/controller'
+import post_controller from '../config/post_controller'
 
 export default {
   data() {
@@ -35,7 +35,7 @@ export default {
   },
   methods:{
     getPosts() {
-      controller.all()
+      post_controller.all()
         .then(response => {
           this.posts = response.data
         })
@@ -45,7 +45,7 @@ export default {
     },
     deletePost (id){
       if (confirm('Are you sure to delete this post?')) {
-        controller.destroy(id)
+        post_controller.destroy(id)
           .then(response =>{
             this.getPosts()
           })
