@@ -32,8 +32,9 @@ export default{
   methods: {
     logOut(){
       sessionStorage.removeItem('JWT')  
-      this.logged = null
-      this.$router.push({ path: '/' })
+      console.log("AFTER LOGOUT: "+ sessionStorage.getItem('JWT'))
+      this.logged = false
+      this.$forceUpdate()
       this.$router.push({ path: '/signin' })
     }
   }

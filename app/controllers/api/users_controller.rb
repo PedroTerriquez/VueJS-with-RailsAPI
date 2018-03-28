@@ -20,7 +20,6 @@ module Api
     def create
       @user = User.new(user_params)
       save_user(:new)
-      binding.pry
       login
     end
 

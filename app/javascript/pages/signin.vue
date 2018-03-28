@@ -21,6 +21,7 @@
 
 <script>
 import user_controller from '../config/user_controller'
+
 export default {
   data() {
     return {
@@ -36,6 +37,7 @@ export default {
       user_controller.signin(this.user)      
         .then(response =>{
           sessionStorage.setItem("JWT", response.data.auth_token)
+          this.$forceUpdate()
           this.goBack()
         })
         .catch(e=>{
