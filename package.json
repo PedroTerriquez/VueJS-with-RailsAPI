@@ -8,7 +8,6 @@
     "vue": "^2.5.16",
     "vue-loader": "^14.2.1",
     "vue-router": "^3.0.1",
-    "vue-sessionstorage": "^1.0.0",
     "vue-template-compiler": "^2.5.16",
     "vuex": "^3.0.1"
   },

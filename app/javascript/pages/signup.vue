@@ -45,8 +45,8 @@ export default {
       console.log(this.user)
       user_controller.signup(this.user)
         .then(response =>{
-          console.log(response)
-          //this.goBack()
+          sessionStorage.setItem("JWT", response.data.auth_token)
+          this.$router.push({ path: '/'})
         })
         .catch(e=>{
           this.errors = e.response.data

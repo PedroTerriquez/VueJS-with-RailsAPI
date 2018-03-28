@@ -3,16 +3,12 @@
   nav#mainNav.navbar.navbar-expand-lg.navbar-dark.bg-dark
     .container
       a.navbar-brand.js-scroll-trigger(href='/') Home
-      button.navbar-toggler(aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation', data-target='#navbarResponsive', data-toggle='collapse', type='button')
-        span.navbar-toggler-icon
-      #navbarResponsive.collapse.navbar-collapse
-        ul.navbar-nav.ml-auto
-          li.nav-item
-            a.nav-link.js-scroll-trigger(href='/signup') Sign Up
-          li.nav-item
-            a.nav-link.js-scroll-trigger(href='/signin') Sign In
-          li.nav-item
-            a.nav-link.js-scroll-trigger(v-on:click.prevent="logOut") Log out
+      div(v-if="logged")
+        a.navbar-brand.js-scroll-trigger(href='',v-on:click.prevent="logOut") Log out
+      div(v-else)
+        a.navbar-brand.js-scroll-trigger(href='/signup') Sign Up
+        a.navbar-brand.js-scroll-trigger(href='/signin') Sign In
+
   header
     .container
       .row.branding
@@ -30,12 +26,15 @@ import post_controller from '../config/post_controller'
 export default{
   data(){
     return{
+      logged: sessionStorage.getItem('JWT')
   }
   },
   methods: {
     logOut(){
       sessionStorage.removeItem('JWT')  
-      this.$router.push({ path: '/signin'})
+      this.logged = null
+      this.$router.push({ path: '/' })
+      this.$router.push({ path: '/signin' })
     }
   }
 }

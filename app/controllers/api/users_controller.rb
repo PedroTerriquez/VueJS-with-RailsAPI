@@ -20,6 +20,8 @@ module Api
     def create
       @user = User.new(user_params)
       save_user(:new)
+      binding.pry
+      login
     end
 
     def destroy
@@ -46,15 +48,13 @@ module Api
       return nil unless user and user.id
       {
         auth_token: JsonWebToken.encode({user_id: user.id}),
-        user: { id: user.id, email: user.email }
+        user: { id: user.id, email: user.email, first_name: user.first_name }
       }
     end
-    def save_user(action)
-      if @user.save
-        render 'show'
-      else
-        render json: @user.errors, status: 400
 
+    def save_user(action)
+      if !@user.save
+        render json: @user.errors, status: 400
       end
     end
 
