@@ -2,13 +2,13 @@
 #header
   nav#mainNav.navbar.navbar-expand-lg.navbar-dark.bg-dark
     .container
-      a.navbar-brand.js-scroll-trigger(href='/#/') Home
-      button.navbar-toggler(aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation', data-target='#navbarResponsive', data-toggle='collapse', type='button')
-        span.navbar-toggler-icon
-      #navbarResponsive.collapse.navbar-collapse
-        ul.navbar-nav.ml-auto
-          li.nav-item
-            a.nav-link.js-scroll-trigger(href='#about') About
+      a.navbar-brand.js-scroll-trigger(href='/') Home
+      div(v-if="logged")
+        a.navbar-brand.js-scroll-trigger(href='',v-on:click.prevent="logOut") Log out
+      div(v-else)
+        a.navbar-brand.js-scroll-trigger(href='/signup') Sign Up
+        a.navbar-brand.js-scroll-trigger(href='/signin') Sign In
+
   header
     .container
       .row.branding
@@ -21,6 +21,24 @@
 </template>
 
 <script>
+import post_controller from '../config/post_controller'
+
+export default{
+  data(){
+    return{
+      logged: sessionStorage.getItem('JWT')
+  }
+  },
+  methods: {
+    logOut(){
+      sessionStorage.removeItem('JWT')  
+      console.log("AFTER LOGOUT: "+ sessionStorage.getItem('JWT'))
+      this.logged = false
+      this.$forceUpdate()
+      this.$router.push({ path: '/signin' })
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -39,13 +57,13 @@ section {
 }
 
 img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 70px;
-    height: 70px;
-    margin:-30px 0 0 -30px;
-    animation:spin 300s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  margin:-30px 0 0 -30px;
+  animation:spin 1s linear infinite;
 }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 </style>

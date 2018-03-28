@@ -3,54 +3,55 @@
   .container
     .col-xs-10.offset-xs-1.col-md-4.offset-md-4
       .card.text-center
-        .card-header Edit Post
+        .card-header Sign In
         .card-body
-          form(v-on:submit.prevent="patchPost")
+          form(v-on:submit.prevent="signIn")
             .form-group
-              label Title
-              input.form-control(v-model='post.title', :placeholder='post.title')
+              label email
+              input.form-control(type="email", value="user", v-model='user.email')
             .form-group
-              label Body
-              textarea.form-control(v-model='post.body', :placeholder='post.body')
+              label password
+              input.form-control(type="password",v-model='user.password')
             button.btn.btn-primary(type="submit") Submit
         .card-footer.text-muted
           .alert.alert-danger(v-for='(field, key in errors')
             strong(v-for='error in field') {{ key }} {{ error }}
-          a(href="#",v-on:click="goBack") Back 
+          a(href="",v-on:click="goSignUp") Create an account 
 </template>
 
 <script>
-import post_controller from '../config/post_controller'
+import user_controller from '../config/user_controller'
 
 export default {
   data() {
     return {
-      post: {},
+      user: {
+        email:null,
+        password:null
+      },
       errors: {} 
     }
   },
   methods:{
-    patchPost() {
-      post_controller.update(this.post)
+    signIn() {
+      user_controller.signin(this.user)      
         .then(response =>{
+          sessionStorage.setItem("JWT", response.data.auth_token)
+          this.$forceUpdate()
           this.goBack()
         })
         .catch(e=>{
           this.errors = e.response.data
         }) 
     },
+    goSignUp(){
+      this.$router.push({ path: "/signup"})
+    },
     goBack(){
       this.$router.go(-1)
     }
   },
   created() {
-    post_controller.show(this.$route.params.id)
-      .then(response => {
-        this.post = response.data
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
   }
 }
 </script>
