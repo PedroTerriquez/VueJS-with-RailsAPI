@@ -5,9 +5,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    user: {
-      auth_token: "Token empty"
-    } 
+    user: null 
   },
   mutations: {
     user (state, value) {

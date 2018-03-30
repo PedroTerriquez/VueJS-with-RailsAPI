@@ -47,7 +47,7 @@ module Api
       return nil unless user and user.id
       {
         auth_token: JsonWebToken.encode({user_id: user.id}),
-        user: { id: user.id, email: user.email, first_name: user.first_name }
+        user: { id: user.id, email: user.email, full_name: user.full_name }
       }
     end
 

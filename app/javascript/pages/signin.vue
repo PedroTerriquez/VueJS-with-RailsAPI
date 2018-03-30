@@ -37,6 +37,7 @@ export default {
       user_controller.signin(this.user)      
         .then(response =>{
           sessionStorage.setItem("JWT", response.data.auth_token)
+          this.$store.commit('user',response.data)
           this.$forceUpdate()
           this.goBack()
         })

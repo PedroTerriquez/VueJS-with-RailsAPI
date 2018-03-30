@@ -2,12 +2,13 @@
 #header
   nav#mainNav.navbar.navbar-expand-lg.navbar-dark.bg-dark
     .container
-      a.navbar-brand.js-scroll-trigger(href='/') Home
-      div(v-if="logged")
+      router-link.navbar-brand.js-scroll-trigger(:to='{ name: "index" }') Home
+      div(v-if="isSigned")
+        div.navbar-brand.js-scroll-trigger {{ $store.state.user.user.full_name }}
         a.navbar-brand.js-scroll-trigger(href='',v-on:click.prevent="logOut") Log out
       div(v-else)
-        a.navbar-brand.js-scroll-trigger(href='/signup') Sign Up
-        a.navbar-brand.js-scroll-trigger(href='/signin') Sign In
+        router-link.navbar-brand.js-scroll-trigger(:to='{ name: "signin" }') Sign In
+        router-link.navbar-brand.js-scroll-trigger(:to='{ name: "signup" }') Sign Up
 
   header
     .container
@@ -32,10 +33,13 @@ export default{
   methods: {
     logOut(){
       sessionStorage.removeItem('JWT')  
-      console.log("AFTER LOGOUT: "+ sessionStorage.getItem('JWT'))
-      this.logged = false
-      this.$forceUpdate()
+      this.$store.commit('user')
       this.$router.push({ path: '/signin' })
+    }
+  },
+  computed: {
+    isSigned() {
+      return (this.$store.state.user)
     }
   }
 }
