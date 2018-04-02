@@ -36,14 +36,15 @@ module Api
 
     def destroy
       if @post.present?
-        @post.destroy 
-        render json: {message: "success"}, status: 200
+        @post.destroy
+        render json: { message: 'success' }, status: 200
       else
-        render json: @post, message: "Failed to remove", status: :bad_request
+        render json: @post, message: 'Failed to remove', status: :bad_request
       end
     end
 
     private
+
     def find_post
       @post = Post.find_by(id: params[:id])
     end

@@ -20,7 +20,6 @@ module Api
     def create
       @user = User.new(user_params)
       save_user(:new)
-      login
     end
 
     def destroy
@@ -54,6 +53,8 @@ module Api
     def save_user(action)
       if !@user.save
         render json: @user.errors, status: 400
+      else
+        login
       end
     end
 
