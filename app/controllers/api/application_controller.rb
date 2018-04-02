@@ -4,16 +4,20 @@ module Api
 
     protected
     def authenticate_request!
-      unless user_id_in_token?
-        render json: { errors: ['Not Authenticated'] }, status: :unauthorized
-        return
-      end
-      @current_user = User.find(auth_token[:user_id])
+      return render auth_error unless user_id_in_token?
+      @current_user = User.find(@auth_token[:user_id])
     rescue JWT::VerificationError, JWT::DecodeError
-      render json: { errors: ['Not Authenticated/Error'] }, status: :unauthorized
+      render auth_error
     end
 
     private
+
+    def auth_error
+      {
+        json: { errors: ['Not Authenticated/Error'] },
+        status: :unauthorized
+      }
+    end
 
     def http_token
       @http_token ||= if request.headers['Authorization'].present?
@@ -26,7 +30,7 @@ module Api
     end
 
     def user_id_in_token?
-      http_token && auth_token && auth_token[:user_id].to_i
+      http_token && auth_token && @auth_token[:user_id].to_i
     end
   end
 end

@@ -17,22 +17,15 @@
           img.imagen.logo(src='https://vuejs.org/images/logo.png', alt='Logo')
         .col-md-11
           h1 Vue.js CRUD POSTS
-          p Created by: 
-            a(href='https://github.com/PedroTerriquez') Pedro Terriquez
 </template>
 
 <script>
 import post_controller from '../config/post_controller'
 
 export default{
-  data(){
-    return{
-      logged: sessionStorage.getItem('JWT')
-  }
-  },
   methods: {
     logOut(){
-      sessionStorage.removeItem('JWT')  
+      sessionStorage.removeItem('user')
       this.$store.commit('user')
       this.$router.push({ path: '/signin' })
     }
@@ -41,6 +34,10 @@ export default{
     isSigned() {
       return (this.$store.state.user)
     }
+  },
+  created(){
+    //On refresh SPA update session to VueStore
+    this.$store.commit('user', JSON.parse(sessionStorage.getItem("user") ) )
   }
 }
 </script>

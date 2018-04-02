@@ -2,8 +2,9 @@ import axios from 'axios';
 import store from './session'
 
 function config() {
-  return {
-  headers: { 'Authorization': "Bearer " + sessionStorage.getItem('JWT')}
+  if (store.state.user)
+    return {
+      headers: { 'Authorization': "Bearer " + store.state.user.auth_token }
   }
 }
 

@@ -36,13 +36,12 @@ export default {
     signIn() {
       user_controller.signin(this.user)      
         .then(response =>{
-          sessionStorage.setItem("JWT", response.data.auth_token)
+          sessionStorage.setItem("user", JSON.stringify(response.data))
           this.$store.commit('user',response.data)
-          this.$forceUpdate()
           this.goBack()
         })
         .catch(e=>{
-          this.errors = e.response.data
+          this.errors = e.response
         }) 
     },
     goSignUp(){

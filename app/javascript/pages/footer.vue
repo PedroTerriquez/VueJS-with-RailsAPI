@@ -1,7 +1,7 @@
 <template lang="pug">
   footer.bg-dark.site-footer
     .container
-      p.m-0.text-center.text-white Copyright © POSTCITY 2017
+      p.m-0.text-center.text-white Copyright © POSTCITY 2018 by TeSoft
 </template>
 
 <script>
